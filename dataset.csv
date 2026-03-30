@@ -1,0 +1,317 @@
+text,intent
+привет,greeting
+здравствуй,greeting
+здравствуйте,greeting
+добрый день,greeting
+доброе утро,greeting
+добрый вечер,greeting
+приветствую,greeting
+здрасте,greeting
+приветик,greeting
+здорово,greeting
+салют,greeting
+хай,greeting
+хеллоу,greeting
+доброго здоровья,greeting
+рад тебя видеть,greeting
+привет как дела,greeting
+здравствуйте чем могу помочь,greeting
+приветствую вас,greeting
+доброго времени суток,greeting
+здравствуйте всем,greeting
+привет всем,greeting
+здравствуйте как жизнь,greeting
+добрый денек,greeting
+здравия желаю,greeting
+приветствую тебя,greeting
+доброго здравия,greeting
+здорово что ты есть,greeting
+привет дружище,greeting
+здравствуй дружище,greeting
+доброго здоровья желаю,greeting
+здравствуйте товарищи,greeting
+приветствую всех,greeting
+здравствуйте дорогие,greeting
+рад приветствовать,greeting
+приветствую с уважением,greeting
+здравствуйте пожалуйста,greeting
+добрый час,greeting
+хелло,greeting
+хэллоу,greeting
+здоровеньки булы,greeting
+какая погода,weather
+погода,weather
+что за погода,weather
+какой прогноз,weather
+будет ли дождь,weather
+будет ли снег,weather
+сколько градусов,weather
+какая температура,weather
+погода на сегодня,weather
+погода на завтра,weather
+погода в москве,weather
+погода в питере,weather
+какая погода в казани,weather
+сколько градусов в новосибирске,weather
+прогноз на завтра,weather
+температура на улице,weather
+погодка как,weather
+что с погодой,weather
+как погода на улице,weather
+температура за окном,weather
+на улице сколько градусов,weather
+будет тепло,weather
+ожидается дождь,weather
+погода на выходные,weather
+какой прогноз на сегодня,weather
+солнечно ли сегодня,weather
+ветер какой,weather
+влажность какая,weather
+погода в городе,weather
+прогноз погоды на неделю,weather
+какая сегодня погода,weather
+что там с погодой,weather
+погодные условия,weather
+какая погода будет,weather
+прогноз на послезавтра,weather
+будет ли гроза,weather
+температура воды,weather
+давление какое,weather
+ветер сильный,weather
+осадки будут,weather
+погода в россии,weather
+погода в европе,weather
+какая погода в лондоне,weather
+погода в париже,weather
+погода в берлине,weather
+прогноз на месяц,weather
+какая температура завтра,weather
+снег будет,weather
+дождь идет,weather
+солнце светит,weather
+облачно или ясно,weather
+туман будет,weather
+град ожидается,weather
+метель будет,weather
+гроза приближается,weather
+погода в сочи,weather
+погода в крыму,weather
+погода в калининграде,weather
+погода во владивостоке,weather
+погода в екатеринбурге,weather
+пока,goodbye
+до свидания,goodbye
+всего хорошего,goodbye
+увидимся,goodbye
+прощай,goodbye
+до встречи,goodbye
+бывай,goodbye
+покеда,goodbye
+счастливо,goodbye
+всего доброго,goodbye
+давай пока,goodbye
+пока пока,goodbye
+до скорого,goodbye
+созвонимся,goodbye
+бывайте,goodbye
+удачи,goodbye
+до связи,goodbye
+всего,goodbye
+ну я пошел,goodbye
+давай до свидания,goodbye
+до завтра,goodbye
+до вечера,goodbye
+до понедельника,goodbye
+увидимся позже,goodbye
+покедава,goodbye
+чао,goodbye
+адиос,goodbye
+бай,goodbye
+бай бай,goodbye
+счастливого пути,goodbye
+удачи тебе,goodbye
+всех благ,goodbye
+до новых встреч,goodbye
+с богом,goodbye
+пока пока пока,goodbye
+давай прощай,goodbye
+бывай здоров,goodbye
+счастливо оставаться,goodbye
+покеда ребята,goodbye
+увидимся завтра,goodbye
+как дела,how_are_you
+как у тебя дела,how_are_you
+как настроение,how_are_you
+что нового,how_are_you
+как жизнь,how_are_you
+как сам,how_are_you
+как поживаешь,how_are_you
+как ты,how_are_you
+как оно,how_are_you
+что слышно,how_are_you
+как делишки,how_are_you
+как успехи,how_are_you
+как самочувствие,how_are_you
+как вы,how_are_you
+как твои дела,how_are_you
+что нового у тебя,how_are_you
+как жизнь молодая,how_are_you
+как ты себя чувствуешь,how_are_you
+как поживает семья,how_are_you
+как работа,how_are_you
+как учеба,how_are_you
+что происходит,how_are_you
+как настроение сегодня,how_are_you
+как ты вообще,how_are_you
+как самочувствие сегодня,how_are_you
+как твое настроение,how_are_you
+что хорошего,how_are_you
+как продвигается,how_are_you
+как жизнь вообще,how_are_you
+как здоровье,how_are_you
+как вы поживаете,how_are_you
+как у вас дела,how_are_you
+что слышно нового,how_are_you
+как прошел день,how_are_you
+как выходные,how_are_you
+как отпуск,how_are_you
+как отдыхается,how_are_you
+как работается,how_are_you
+как живется,how_are_you
+сколько время,time
+который час,time
+какое сейчас время,time
+скажи время,time
+сколько сейчас времени,time
+текущее время,time
+часы покажи,time
+время скажи,time
+сколько времени,time
+который час сейчас,time
+сколько на часах,time
+покажи время,time
+который час на часах,time
+скажи который час,time
+какое сегодня число,time
+какой день недели,time
+какая дата,time
+сегодня какое число,time
+какой сейчас год,time
+сколько сейчас на часах,time
+который час подскажи,time
+время подскажи,time
+часы сколько,time
+точное время,time
+время московское,time
+время местное,time
+часы показывают,time
+время сейчас,time
+который час в москве,time
+который час в питере,time
+сколько сейчас часов,time
+который час по москве,time
+время по гринвичу,time
+2+2,addition
+5+3,addition
+10+20,addition
+15+7,addition
+100+200,addition
+сложение,addition
+сколько будет 5 плюс 3,addition
+плюс,addition
+прибавь,addition
+сложи,addition
+посчитай 2+2,addition
+сложить числа,addition
+вычислить,addition
+прибавь пять и три,addition
+два плюс два,addition
+десять плюс двадцать,addition
+сколько будет два плюс два,addition
+три плюс четыре,addition
+семь плюс восемь,addition
+двадцать пять плюс пятнадцать,addition
+сто плюс двести,addition
+тысяча плюс тысяча,addition
+пять плюс пять,addition
+шесть плюс шесть,addition
+девять плюс один,addition
+четыре плюс четыре,addition
+восемь плюс два,addition
+один плюс один,addition
+ноль плюс ноль,addition
+сложи два и два,addition
+сложи пять и три,addition
+сколько получится если сложить,addition
+калькулятор,addition
+посчитать,addition
+подсчитай,addition
+вычисли сумму,addition
+найди сумму,addition
+как тебя зовут,ask_name
+как зовут,ask_name
+твое имя,ask_name
+как к тебе обращаться,ask_name
+представься,ask_name
+кто ты,ask_name
+как тебя называть,ask_name
+твое имя как,ask_name
+как твое имя,ask_name
+имя твое,ask_name
+как твоя фамилия,ask_name
+расскажи о себе,ask_name
+представьтесь,ask_name
+как тебя величать,ask_name
+какое у тебя имя,ask_name
+назови свое имя,ask_name
+скажи как тебя зовут,ask_name
+представься пожалуйста,ask_name
+кто ты такой,ask_name
+что ты за бот,ask_name
+как тебя зовут бот,ask_name
+твое имя бот,ask_name
+как называть тебя,ask_name
+как к тебе обратиться,ask_name
+как обращаться,ask_name
+ваше имя,ask_name
+как вас зовут,ask_name
+спасибо,thanks
+благодарю,thanks
+отлично,thanks
+спасибо большое,thanks
+мерси,thanks
+благодарствую,thanks
+спс,thanks
+пасиб,thanks
+огромное спасибо,thanks
+выручил,thanks
+спасибо за помощь,thanks
+благодарю вас,thanks
+очень признателен,thanks
+ценю,thanks
+спасибочки,thanks
+благодарность,thanks
+спасибо тебе,thanks
+спасибо огромное,thanks
+благодарю тебя,thanks
+спасибо за ответ,thanks
+спасибо за информацию,thanks
+спасибо что помог,thanks
+спасибо за совет,thanks
+спасибо за поддержку,thanks
+благодарю за помощь,thanks
+очень благодарен,thanks
+искренне благодарю,thanks
+примите благодарность,thanks
+спасибо что есть,thanks
+спасибо за внимание,thanks
+спасибо за понимание,thanks
+благодарствую вам,thanks
+крайне признателен,thanks
+спасибо большое вам,thanks
+спасибо за помощь дружище,thanks
+благодарю от души,thanks
+спасибо что выручил,thanks
+спасибо за заботу,thanks
+благодарю за доброту,thanks
+спасибо за участие,thanks
