@@ -1,7 +1,7 @@
-# test_model.py
+
 from intent_classifier import intent_classifier
 
-# Проверяем загрузку модели
+
 print("Проверка модели...")
 
 test_phrases = [
