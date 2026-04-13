@@ -6,7 +6,7 @@ from datetime import datetime
 from weather_api import get_weather, get_weather_forecast
 from database import init_db, save_user, log_weather_query
 from dialog_manager import dialog_manager, DialogState
-from intent_classifier_embeddings import intent_classifier
+from intent_classifier import intent_classifier
 from logger import log_message
 from extractors import extract_city, extract_date_offset, is_weather_query
 
