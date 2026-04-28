@@ -2,14 +2,14 @@
 import pandas as pd
 import torch
 from torch.utils.data import DataLoader, Dataset
-from torch.optim import AdamW  # Импортируем AdamW из torch.optim
+from torch.optim import AdamW
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from sklearn.model_selection import train_test_split
 from tqdm import tqdm
 import os
 
 print("=" * 60)
-print("🤖 FINE-TUNING BERT НА ВАШЕМ DATASET.CSV")
+print("🤖 FINE-TUNING BERT - РАСШИРЕННЫЙ ДАТАСЕТ")
 print("=" * 60)
 
 # 1. Загрузка датасета
@@ -18,15 +18,14 @@ df = pd.read_csv("dataset.csv")
 print(f"   ✅ Загружено {len(df)} примеров")
 print(f"   📊 Интенты:\n{df['intent'].value_counts()}")
 
-# 2. Маппинг - id2label должен иметь СТРОКОВЫЕ ключи
+# 2. Маппинг
 unique_intents = df['intent'].unique()
 label2id = {label: idx for idx, label in enumerate(unique_intents)}
-id2label = {str(idx): label for idx, label in enumerate(unique_intents)}  # КЛЮЧИ - СТРОКИ!
+id2label = {str(idx): label for idx, label in enumerate(unique_intents)}
 num_labels = len(unique_intents)
 
 print(f"\n   📋 Количество интентов: {num_labels}")
-print(f"   📋 label2id: {label2id}")
-print(f"   📋 id2label: {id2label}")
+print(f"   📋 Интенты: {list(unique_intents)}")
 
 # 3. Подготовка данных
 df['label'] = df['intent'].map(label2id)
@@ -87,10 +86,9 @@ val_loader = DataLoader(val_dataset, batch_size=8)
 # 7. Обучение
 print("\n🧠 Обучение...")
 optimizer = AdamW(model.parameters(), lr=2e-5)
-num_epochs = 6
+num_epochs = 10  # Увеличил эпохи
 
 for epoch in range(num_epochs):
-    # Train
     model.train()
     total_loss = 0
     for batch in tqdm(train_loader, desc=f"Epoch {epoch+1}/{num_epochs} [Train]"):
@@ -107,7 +105,6 @@ for epoch in range(num_epochs):
     
     avg_train_loss = total_loss / len(train_loader)
     
-    # Validation
     model.eval()
     correct = 0
     total = 0
@@ -136,14 +133,22 @@ model.save_pretrained("./intent_model")
 tokenizer.save_pretrained("./intent_model")
 print("   ✅ Модель сохранена в './intent_model'")
 
-# 9. Проверка
-print("\n🔍 Проверка сохраненной модели...")
-print(f"   id2label: {model.config.id2label}")
-print(f"   label2id: {model.config.label2id}")
+# 9. Тест
+print("\n🧪 Тест модели:")
+test_phrases = [
+    "привет",
+    "что ты умеешь",
+    "помощь",
+    "какая погода в москве",
+    "сколько время",
+    "какое сегодня число",
+    "как дела",
+    "спасибо",
+    "пока",
+    "2+2",
+    "как тебя зовут"
+]
 
-# 10. Тест
-print("\n🧪 Тест:")
-test_phrases = ["привет", "какая погода", "сколько время", "пока", "2+2", "спасибо", "помощь"]
 for phrase in test_phrases:
     inputs = tokenizer(phrase, return_tensors="pt", truncation=True, max_length=64)
     inputs = {k: v.to(device) for k, v in inputs.items()}
