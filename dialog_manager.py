@@ -1,11 +1,10 @@
-# dialog_manager.py
 from enum import Enum
 
 class DialogState(Enum):
     START = "start"
     WAIT_CITY = "wait_city"
     WAIT_DATE = "wait_date"
-
+    WAIT_CHITCHAT = "wait_chitchat"
 class DialogManager:
     def __init__(self):
         self.user_states = {}

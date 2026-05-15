@@ -13,7 +13,7 @@ class IntentClassifier:
         self.bert_tokenizer = None
         self.use_bert = False
 
-        # Загружаем BERT если есть
+      
         if os.path.exists("./intent_model"):
             try:
                 print("📚 Загрузка BERT модели...")
@@ -22,8 +22,7 @@ class IntentClassifier:
                 self.bert_model.eval()
                 self.use_bert = True
 
-                # HuggingFace загружает id2label с int-ключами {0: 'greeting', 1: 'weather', ...}
-                # Нормализуем: всегда храним как {int: str}
+                
                 raw = self.bert_model.config.id2label
                 self.bert_id2label = {int(k): v for k, v in raw.items()}
 
@@ -33,7 +32,7 @@ class IntentClassifier:
                 print(f"   ⚠️ Ошибка загрузки BERT: {e}")
                 self.use_bert = False
 
-        # Загружаем fallback модель (embeddings)
+       
         self.model = None
         self.vectorizer = None
         if os.path.exists("intent_model_embeddings.pkl"):
@@ -47,7 +46,7 @@ class IntentClassifier:
                 print(f"⚠️ Ошибка загрузки fallback: {e}")
 
     def _rule_based_predict(self, text: str) -> tuple:
-        """Правила — финальный fallback, всегда возвращает (intent, confidence)"""
+        
         text_lower = text.lower()
 
         if any(w in text_lower for w in ['привет', 'здравствуй', 'здравствуйте', 'добрый']):
@@ -74,11 +73,7 @@ class IntentClassifier:
         return "unknown", 0.3
 
     def predict_intent(self, text: str, threshold: float = 0.5) -> tuple:
-        """
-        Предсказание интента.
-        Порядок: BERT → embeddings fallback → rule-based fallback
-        Всегда возвращает (intent, confidence).
-        """
+       
         try:
             # 1. BERT
             if self.use_bert and self.bert_model is not None:
@@ -92,7 +87,7 @@ class IntentClassifier:
                     pred_class = pred.item()          # int
                     conf_val = confidence.item()
 
-                # Ключи нормализованы в int при загрузке — прямой поиск
+                
                 if pred_class in self.bert_id2label:
                     intent = self.bert_id2label[pred_class]
                     if conf_val >= threshold:
@@ -101,7 +96,7 @@ class IntentClassifier:
                 else:
                     print(f"⚠️ BERT вернул индекс {pred_class}, не найден в id2label")
 
-            # 2. Fallback — embeddings
+            
             if self.model is not None and self.vectorizer is not None:
                 doc = self.nlp(text.lower())
                 vectors = [
@@ -117,7 +112,7 @@ class IntentClassifier:
                         print(f"[Embeddings] {intent} ({conf_val:.2%})")
                         return intent, conf_val
 
-            # 3. Финальный fallback — правила
+            
             intent, conf_val = self._rule_based_predict(text)
             print(f"[Rules] {intent} ({conf_val:.2%})")
             return intent, conf_val
@@ -127,11 +122,11 @@ class IntentClassifier:
             return "unknown", 0.3
 
 
-# Глобальный экземпляр
+
 intent_classifier = IntentClassifier()
 
 
-# Обратная совместимость
+
 def predict_intent(text: str) -> str:
     intent, _ = intent_classifier.predict_intent(text)
     return intent

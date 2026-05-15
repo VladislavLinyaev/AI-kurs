@@ -1,4 +1,4 @@
-# skill_router.py - ИСПРАВЛЕННАЯ ВЕРСИЯ
+
 from datetime import datetime
 import random
 
@@ -15,10 +15,10 @@ class SkillRouter:
         return f"Сегодня {datetime.now().strftime('%d.%m.%Y')}"
     
     def greeting_skill(self) -> str:
-        return random.choice(["Здравствуйте!", "Привет!", "Добрый день!"])
+        return random.choice(["Здравствуйте!", "Привет!", "Добрый день!", "Хай!"])
     
     def goodbye_skill(self) -> str:
-        return random.choice(["До свидания!", "Пока!", "Всего хорошего!"])
+        return random.choice(["До свидания!", "Пока!", "Всего хорошего!","ББ!", "Гуд Бай!"])
     
     def help_skill(self) -> str:
         return """Я умею:
@@ -31,9 +31,9 @@ class SkillRouter:
     
     def smalltalk_skill(self) -> str:
         return random.choice([
-            "Всё отлично! А у вас?",
+            "Всё отлично! Чем могу помочь?",
             "Хорошо! Чем могу помочь?",
-            "Прекрасно! Как ваши дела?"
+            "Прекрасно! Какой у вас вопрос?"
         ])
     
     def thanks_skill(self) -> str:
@@ -42,7 +42,7 @@ class SkillRouter:
         ])
     
     def ask_name_skill(self) -> str:
-        return "Меня зовут Бот-помощник. А как вас зовут?"
+        return "Меня зовут Бот-помощник. Я помогаю людям с простейшими вопросами."
     
     def addition_skill(self, text: str) -> str:
         import re
@@ -50,16 +50,16 @@ class SkillRouter:
         if match:
             a, b = float(match.group(1)), float(match.group(2))
             return f"Результат сложения: {a} + {b} = {a + b}"
-        return "Скажите, например: 2+2"
+        return "Скажите, например: 2+2 или 3+5"
     
     def fallback_skill(self) -> str:
-        return "Я не понял. Скажите 'помощь' чтобы узнать что я умею."
+        return "Я не понял. Скажите 'помощь или что ты умеешь' чтобы узнать что я умею."
     
     def route(self, intent: str, text: str, user_id: int = None) -> str:
         if user_id and intent != "conversation":
             self.last_intent[user_id] = intent
         
-        # ИСПРАВЛЕННАЯ МАРШРУТИЗАЦИЯ
+        
         if intent == "weather":
             return self.weather_func(text)
         elif intent == "time":

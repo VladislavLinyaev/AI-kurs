@@ -1,4 +1,4 @@
-# patterns.py (обновленная версия с Skill Router)
+
 import re
 from datetime import datetime
 
@@ -9,6 +9,7 @@ from intent_classifier import intent_classifier
 from skill_router import SkillRouter
 from logger import log_message
 from extractors import extract_city, extract_date_offset, is_weather_query
+from tts_module import speak_async
 
 class ChatBot:
     def __init__(self):
@@ -17,11 +18,12 @@ class ChatBot:
         self.waiting_for_name = False
         init_db()
         
-        # Инициализируем Skill Router
+      
         self.skill_router = SkillRouter(
             weather_func=self.handle_weather,
             addition_func=self.handle_addition
         )
+
     
     def greet(self):
         if self.name:
@@ -39,28 +41,29 @@ class ChatBot:
         self.current_user_id = save_user(self.name)
         return f"Приятно познакомиться, {self.name}!"
 
-    def handle_addition(self, text):
-        match = re.search(r'(\d+)\s*\+\s*(\d+)', text)
-        if match:
-            a = float(match.group(1))
-            b = float(match.group(2))
-            return f"Результат сложения: {a} + {b} = {a + b}"
-        
-        numbers = {
+    def handle_addition(self, text, user_id=None):
+        text = text.lower()
+        num_map = {
             'ноль': 0, 'один': 1, 'два': 2, 'три': 3, 'четыре': 4,
-            'пять': 5, 'шесть': 6, 'семь': 7, 'восемь': 8, 'девять': 9,
-            'десять': 10
+            'пять': 5, 'шесть': 6, 'семь': 7, 'восемь': 8, 'девять': 9, 'десять': 10
         }
         
-        text_lower = text.lower()
-        if 'плюс' in text_lower:
-            for word, num in numbers.items():
-                if word in text_lower:
-                    for word2, num2 in numbers.items():
-                        if word2 in text_lower and word != word2:
-                            return f"Результат сложения: {num} + {num2} = {num + num2}"
+       
+        found_nums = []
+        words = re.findall(r'\w+', text)
         
-        return "Скажите, например: 2+2 или два плюс два"
+        for word in words:
+            if word.isdigit():
+                found_nums.append(int(word))
+            elif word in num_map:
+                found_nums.append(num_map[word])
+        
+        if len(found_nums) >= 2:
+            result = sum(found_nums)
+            res_str = f"Результат: {' + '.join(map(str, found_nums))} = {result}"
+            return res_str
+        
+        return "Я могу складывать числа, например: '2+2'."
 
     def handle_weather(self, message):
         city = extract_city(message)
@@ -109,37 +112,43 @@ class ChatBot:
         
         return None
 
+   
     def process(self, message):
-        message_clean = message.strip()
+        message_clean = message.strip()    
         
-        # Обработка имени
-        if self.waiting_for_name and re.match(r'^[а-яА-ЯёЁa-zA-Z\s]+$', message_clean):
+        if self.waiting_for_name:
             self.waiting_for_name = False
-            name_parts = message_clean.split()
-            name = name_parts[0].capitalize()
+            
+            match = re.search(r'(?:зовут|имя|это)\s+([А-ЯЁа-яё]+)', message_clean, re.I)
+            if match:
+                name = match.group(1).capitalize()
+            else:
+                name = message_clean.split()[-1].strip(".,!?").capitalize()
             response = self.set_name(name)
             log_message(message_clean, response)
             return response
         
-        # Если пользователь ещё не представился
+        
         if not self.current_user_id and not self.waiting_for_name:
             self.waiting_for_name = True
             response = "Здравствуйте! Как вас зовут?"
             log_message(message_clean, response)
+            
             return response
         
-        # Проверка состояния диалога (погода)
+        
         if self.current_user_id:
             state_response = self.handle_weather_with_state(message_clean)
             if state_response:
                 log_message(message_clean, state_response)
+                
                 return state_response
         
-        # Определяем интент через BERT
+      
         intent, confidence = intent_classifier.predict_intent(message_clean)
         print(f"[DEBUG BERT] Intent: {intent}, Confidence: {confidence:.2%}")
         
-        # Маршрутизация через Skill Router
+        
         response = self.skill_router.route(
             intent=intent,
             text=message_clean,
@@ -147,6 +156,7 @@ class ChatBot:
         )
         
         log_message(message_clean, response)
+        
         return response
 
 bot = ChatBot()
